@@ -10,12 +10,14 @@ interface  GeoLocation{
   position: GeoPosition | null,
   currentCity: string | null,
   isGeolocationTurnOn: boolean,
+  isCityLoading: boolean,
 }
 
 const initialState: GeoLocation = { 
   position: null,
   currentCity: null,
   isGeolocationTurnOn: true,
+  isCityLoading: false,
  }
 
  export const getUserCityName = createAsyncThunk(
@@ -42,7 +44,11 @@ const geoLocationSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(getUserCityName.pending, (state: GeoLocation) => {
+        state.isCityLoading = true
+      })
       .addCase(getUserCityName.fulfilled, (state: GeoLocation, { payload }) => {
+        state.isCityLoading = false
         const { suggestions } = payload;
         if (suggestions.length !== 0) {
           state.currentCity = suggestions[0].data.city;
