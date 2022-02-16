@@ -21,21 +21,19 @@ export const CitySettings = () => {
   useEffect(() => {
     if (cityInput.value) {
       dispatch(changeCurrentCity(cityInput.value));
-      localStorage.setItem('city', cityInput.value);
     }
   }, [cityInput]);
 
   useEffect(() => {
-    getUserCoords();
     if (lastUsedCity) {
       dispatch(changeCurrentCity(lastUsedCity))
+    } else {
+      getUserCoords();
     }
   }, []);
 
   useEffect(() => {
-    if (!lastUsedCity) {
-      dispatch(getUserCityName(coords));
-    }
+    dispatch(getUserCityName(coords));
   }, [coords]);
 
   let searchDelayTimer: any;

@@ -15,7 +15,7 @@ interface  GeoLocation{
 const initialState: GeoLocation = { 
   position: null,
   currentCity: null,
-  isGeolocationTurnOn: false,
+  isGeolocationTurnOn: true,
  }
 
  export const getUserCityName = createAsyncThunk(
@@ -34,6 +34,7 @@ const geoLocationSlice = createSlice({
     },
     changeCurrentCity(state, { payload }) {
       state.currentCity = payload;
+      localStorage.setItem('city', payload);
     },
     changeGeolocationAccess(state, { payload }) {
       state.isGeolocationTurnOn = payload;
@@ -45,6 +46,7 @@ const geoLocationSlice = createSlice({
         const { suggestions } = payload;
         if (suggestions.length !== 0) {
           state.currentCity = suggestions[0].data.city;
+          localStorage.setItem('city', suggestions[0].data.city);
         }
       })
     }
