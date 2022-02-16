@@ -1,0 +1,15 @@
+.city {
+    margin-top: 180px;
+    color: white;
+}
+
+.icon:hover {
+    cursor: pointer;
+    transform: scale(1.3);
+    transition: .5s;
+    color: lightgreen;
+}
+
+.warn {
+    color: red;
+}
