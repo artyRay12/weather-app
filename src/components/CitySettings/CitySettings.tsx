@@ -34,7 +34,9 @@ export const CitySettings = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(getUserCityName(coords as GeoPosition));
+    if (coords) {
+      dispatch(getUserCityName(coords as GeoPosition));
+    }
   }, [coords]);
 
   let searchDelayTimer: ReturnType<typeof setTimeout>;
