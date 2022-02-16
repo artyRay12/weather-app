@@ -1,11 +1,6 @@
 import axios from "axios";
 import { GEOLOCATION_DEFINE_URL, GET_CITIES_URL } from './geoLocation.model';
 
-// export const getCities = (cityName: string) => {
-//   return axios.get(`${GET_CITIES_URL}q=${cityName}`)
-//     .then(res => res.data);
-// }
-
 export const getUserCity = async (coords: any) => {
     const options = {
       method: 'POST',
@@ -32,7 +27,6 @@ export const getUserCity = async (coords: any) => {
 
 
 export const getCities = (city: string) => {
-  const token = '39919afc8446fb6af07618d286cbfcbd76a591d3';
   var query = city;
 
   var options = {
@@ -41,11 +35,10 @@ export const getCities = (city: string) => {
       headers: {
           "Content-Type": "application/json",
           "Accept": "application/json",
-          "Authorization": "Token " + token
+          "Authorization": "Token " + process.env.REACT_APP_ENV_DADATA_TOKEN,
       },
       body: JSON.stringify({query: query})
   }
-  // const data = JSON.stringify({query: query})
   //@ts-ignore
   return fetch(GET_CITIES_URL, options)
 }
