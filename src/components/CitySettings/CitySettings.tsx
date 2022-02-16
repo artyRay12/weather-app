@@ -37,7 +37,7 @@ export const CitySettings = () => {
     dispatch(getUserCityName(coords as GeoPosition));
   }, [coords]);
 
-  let searchDelayTimer: any;
+  let searchDelayTimer: ReturnType<typeof setTimeout>;
   const promiseOptions = (inputValue: string) =>
     new Promise((resolve) => {
       clearTimeout(searchDelayTimer);
