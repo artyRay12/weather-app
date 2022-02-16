@@ -5,7 +5,7 @@ export const useUserGeolocation = () => {
   const dispatch = useDispatch();
   const saveCoods = (result: any) => {
     const { coords: { latitude: lat, longitude: lon } } = result;
-    changeGeolocationAccess(true)
+    dispatch(changeGeolocationAccess(true));
     dispatch(getPosition({ lat, lon}))
   }
 
