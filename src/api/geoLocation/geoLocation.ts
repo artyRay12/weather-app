@@ -1,7 +1,8 @@
 import axios from "axios";
+import { GeoPosition } from "../../redux/geoLocationSlice";
 import { GEOLOCATION_DEFINE_URL, GET_CITIES_URL } from './geoLocation.model';
 
-export const getUserCity = async (coords: any) => {
+export const getUserCity = async (coords: GeoPosition) => {
   const options = {
     method: 'POST',
     mode: 'cors',

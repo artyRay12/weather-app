@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import * as geoLocationApi from '../api/geoLocation/geoLocation'
 
-interface GeoPosition {
+export interface GeoPosition {
   lat: number,
   ion: number,
 }
