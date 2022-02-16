@@ -12,6 +12,7 @@ export const CitySettings = () => {
   const dispatch = useDispatch();
   const currentCity = useSelector((state: RootState) => state.geoLocation.currentCity);
   const coords = useSelector((state: RootState) => state.geoLocation.position);
+  const lastUsedCity = localStorage.getItem('city');
   const [getUserCoords] = useUserGeolocation();
   const [cityInput, setCityInput] = useState<CityOption>({
     value: '', label: ''
@@ -19,16 +20,22 @@ export const CitySettings = () => {
 
   useEffect(() => {
     if (cityInput.value) {
-      dispatch(changeCurrentCity(cityInput.value))
+      dispatch(changeCurrentCity(cityInput.value));
+      localStorage.setItem('city', cityInput.value);
     }
   }, [cityInput]);
 
   useEffect(() => {
     getUserCoords();
+    if (lastUsedCity) {
+      dispatch(changeCurrentCity(lastUsedCity))
+    }
   }, []);
 
   useEffect(() => {
-    dispatch(getUserCityName(coords));
+    if (!lastUsedCity) {
+      dispatch(getUserCityName(coords));
+    }
   }, [coords]);
 
   let searchDelayTimer: any;
