@@ -7,6 +7,7 @@ import { CityOption, defaultCities } from './CitySettings.model';
 import { getCities } from '../../api/geoLocation/geoLocation';
 import { RootState } from '../../redux';
 import { useUserGeolocation } from './../../hooks/useUserGeolocation';
+import { GeoPosition } from './../../redux/geoLocationSlice';
 
 export const CitySettings = () => {
   const dispatch = useDispatch();
@@ -33,7 +34,7 @@ export const CitySettings = () => {
   }, []);
 
   useEffect(() => {
-    dispatch(getUserCityName(coords));
+    dispatch(getUserCityName(coords as GeoPosition));
   }, [coords]);
 
   let searchDelayTimer: any;
